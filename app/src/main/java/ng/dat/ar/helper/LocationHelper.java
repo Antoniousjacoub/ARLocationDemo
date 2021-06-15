@@ -77,7 +77,7 @@ public class LocationHelper {
         Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
                 + " Meter   " + meterInDec);
 
-        return String.format("Distance : %.2f KM", valueResult);
+        return String.format("Distance : %.2f M", valueResult*1000);
     }
 
     /**

@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.opengl.Matrix;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class AROverlayView extends View {
 
         //Demo points
         arPoints = new ArrayList<ARPoint>() {{
+            Log.i("TAG", "instance initializer:"+"start");
             add(new ARPoint(DESTINATION_NAME, DESTINATION_LAT, DESTINATION_LOG, 0));
         }};
 
@@ -71,6 +73,7 @@ public class AROverlayView extends View {
         paint.setTextSize(60);
 
         for (int i = 0; i < arPoints.size(); i++) {
+
             float[] currentLocationInECEF = LocationHelper.WSG84toECEF(currentLocation);
             float[] pointInECEF = LocationHelper.WSG84toECEF(arPoints.get(i).getLocation());
             float[] pointInENU = LocationHelper.ECEFtoENU(currentLocation, currentLocationInECEF, pointInECEF);
@@ -84,8 +87,8 @@ public class AROverlayView extends View {
                 float x = (0.5f + cameraCoordinateVector[0] / cameraCoordinateVector[3]) * canvas.getWidth();
                 float y = (0.5f - cameraCoordinateVector[1] / cameraCoordinateVector[3]) * canvas.getHeight();
 
-                Bitmap b = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-                canvas.drawBitmap(b, x - (30 * arPoints.get(i).getName().length() / 2), y - 80, paint);
+                Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_logo);
+                canvas.drawBitmap(Bitmap.createScaledBitmap(b, 300, 300, false), x - (30 * arPoints.get(i).getName().length() / 2), y - 80, paint);
                 canvas.drawCircle(x, y, radius, paint);
                 canvas.drawText(arPoints.get(i).getName(), x - (30 * arPoints.get(i).getName().length() / 2), y - 80, paint);
             }

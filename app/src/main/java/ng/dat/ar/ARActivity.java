@@ -197,6 +197,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+
         if (arCamera == null) return;
         if (sensorEvent.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
             float[] rotationMatrixFromVector = new float[16];
@@ -307,6 +308,8 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
 
     @Override
     public void onLocationChanged(Location location) {
+       // Toast.makeText(this,location.getLatitude()+","+location.getLongitude(),Toast.LENGTH_LONG).show();
+        this.location=location;
         updateLatestLocation();
     }
 

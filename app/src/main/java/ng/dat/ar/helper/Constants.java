@@ -2,7 +2,9 @@ package ng.dat.ar.helper;
 
 public class Constants {
 
-    public static String DESTINATION_NAME = "IBM Egypt";
-    public static double DESTINATION_LAT = 30.075568993290148;
-    public static double DESTINATION_LOG = 31.019768982728728;
+    public static String DESTINATION_NAME = "Orange Gift";
+    public static double DESTINATION_LAT = 29.962998;
+    public static double DESTINATION_LOG = 31.306933;
 }
+
+
