@@ -378,10 +378,11 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     private void checkTheSameLocation() {
         if (location == null) return;
 
-        if (LocationHelper.distanceDiff(location.getLatitude(),
-                location.getLongitude(), DESTINATION_LAT, DESTINATION_LOG) == 0 && !isDestinationPopupShowed) {
-            Toast.makeText(this,
-                    getString(R.string.destinationReached), Toast.LENGTH_LONG).show();
+        LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+        LatLng destLatLng = new LatLng(DESTINATION_LAT, DESTINATION_LOG);
+        if (LocationHelper.distanceDiff(currentLatLng,destLatLng) < 10 && !isDestinationPopupShowed) {
+            Toast.makeText(this, getString(R.string.destinationReached)
+                    , Toast.LENGTH_LONG).show();
             isDestinationPopupShowed = true;
         }
 

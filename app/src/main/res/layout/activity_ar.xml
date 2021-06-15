@@ -30,15 +30,15 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="center_horizontal"
             android:layout_margin="30dp"
-            android:backgroundTint="#4a148c"
+            android:backgroundTint="@color/colorPrimary"
             android:drawablePadding="10dp"
             android:padding="20dp"
             android:text="Google Maps"
             android:textColor="#FFF"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/tvDistance"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvDistance" />
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/tvDistance"
@@ -47,23 +47,24 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="30dp"
-            android:background="#000000"
+            android:background="@color/colorPrimary"
             android:padding="20dp"
             android:textColor="#FFFFFF"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="@string/app_name" />
+            tools:text="@string/app_name"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tv_bearing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_margin="20dp"
         android:text="GPS is loading..."
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_current_location"
