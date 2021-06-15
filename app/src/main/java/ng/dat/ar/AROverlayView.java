@@ -17,9 +17,9 @@ import java.util.List;
 import ng.dat.ar.helper.LocationHelper;
 import ng.dat.ar.model.ARPoint;
 
-import static ng.dat.ar.helper.Utility.IBM_LAT;
-import static ng.dat.ar.helper.Utility.IBM_LOG;
-import static ng.dat.ar.helper.Utility.IBM_NAME;
+import static ng.dat.ar.helper.Constants.DESTINATION_LAT;
+import static ng.dat.ar.helper.Constants.DESTINATION_LOG;
+import static ng.dat.ar.helper.Constants.DESTINATION_NAME;
 
 /**
  * Created by ntdat on 1/13/17.
@@ -40,7 +40,7 @@ public class AROverlayView extends View {
 
         //Demo points
         arPoints = new ArrayList<ARPoint>() {{
-            add(new ARPoint(IBM_NAME, IBM_LAT, IBM_LOG, 0));
+            add(new ARPoint(DESTINATION_NAME, DESTINATION_LAT, DESTINATION_LOG, 0));
         }};
 
     }

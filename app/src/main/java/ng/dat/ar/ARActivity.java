@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,9 +40,8 @@ import static android.hardware.SensorManager.*;
 import static android.view.Surface.*;
 import static android.view.Surface.ROTATION_180;
 import static android.view.Surface.ROTATION_270;
-import static ng.dat.ar.helper.Utility.IBM_LAT;
-import static ng.dat.ar.helper.Utility.IBM_LOG;
-import static ng.dat.ar.helper.Utility.IBM_NAME;
+import static ng.dat.ar.helper.Constants.DESTINATION_LAT;
+import static ng.dat.ar.helper.Constants.DESTINATION_LOG;
 
 public class ARActivity extends AppCompatActivity implements SensorEventListener, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private GoogleApiClient mGoogleApiClient;
@@ -59,6 +57,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     private TextView tvBearing;
     private Step steps[];
     private SensorManager sensorManager;
+    private boolean isDestinationPopupShowed = false;
     private final static int REQUEST_CAMERA_PERMISSIONS_CODE = 11;
     public static final int REQUEST_LOCATION_PERMISSIONS_CODE = 0;
 
@@ -301,6 +300,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
             tvCurrentLocation.setText(String.format("lat: %s \nlon: %s \naltitude: %s \n",
                     location.getLatitude(), location.getLongitude(), location.getAltitude()));
             setDistance();
+            checkTheSameLocation();
         }
     }
 
@@ -344,7 +344,20 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     private void setDistance() {
         if (location == null) return;
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-        LatLng destLatLng = new LatLng(IBM_LAT, IBM_LOG);
+        LatLng destLatLng = new LatLng(DESTINATION_LAT, DESTINATION_LOG);
         tvDistance.setText(LocationHelper.calculationByDistance(currentLatLng, destLatLng));
+    }
+
+    private void checkTheSameLocation() {
+        if (location == null) return;
+
+        if (LocationHelper.distanceDiff(location.getLatitude(),
+                location.getLongitude(), DESTINATION_LAT, DESTINATION_LOG) == 0 && !isDestinationPopupShowed) {
+            Toast.makeText(this,
+                    getString(R.string.destinationReached), Toast.LENGTH_LONG).show();
+            isDestinationPopupShowed = true;
+        }
+
+
     }
 }

@@ -30,29 +30,29 @@ public class LocationHelper {
         float y = (float) ((N + location.getAltitude()) * clat * slon);
         float z = (float) ((N * (1.0 - WGS84_E2) + location.getAltitude()) * slat);
 
-        return new float[] {x , y, z};
+        return new float[]{x, y, z};
     }
 
     public static float[] ECEFtoENU(Location currentLocation, float[] ecefCurrentLocation, float[] ecefPOI) {
         double radLat = Math.toRadians(currentLocation.getLatitude());
         double radLon = Math.toRadians(currentLocation.getLongitude());
 
-        float clat = (float)Math.cos(radLat);
-        float slat = (float)Math.sin(radLat);
-        float clon = (float)Math.cos(radLon);
-        float slon = (float)Math.sin(radLon);
+        float clat = (float) Math.cos(radLat);
+        float slat = (float) Math.sin(radLat);
+        float clon = (float) Math.cos(radLon);
+        float slon = (float) Math.sin(radLon);
 
         float dx = ecefCurrentLocation[0] - ecefPOI[0];
         float dy = ecefCurrentLocation[1] - ecefPOI[1];
         float dz = ecefCurrentLocation[2] - ecefPOI[2];
 
-        float east = -slon*dx + clon*dy;
+        float east = -slon * dx + clon * dy;
 
-        float north = -slat*clon*dx - slat*slon*dy + clat*dz;
+        float north = -slat * clon * dx - slat * slon * dy + clat * dz;
 
-        float up = clat*clon*dx + clat*slon*dy + slat*dz;
+        float up = clat * clon * dx + clat * slon * dy + slat * dz;
 
-        return new float[] {east , north, up, 1};
+        return new float[]{east, north, up, 1};
     }
 
     public static String calculationByDistance(LatLng StartP, LatLng EndP) {
@@ -77,6 +77,29 @@ public class LocationHelper {
         Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
                 + " Meter   " + meterInDec);
 
-        return  String.format("Distance : %.2f KM", valueResult);
+        return String.format("Distance : %.2f KM", valueResult);
+    }
+
+    /**
+     * calculates the distance between two locations in MILES
+     */
+    public static double distanceDiff(double lat1, double lng1, double lat2, double lng2) {
+
+        double earthRadius = 3958.75; // in miles, change to 6371 for kilometer output
+
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLng = Math.toRadians(lng2 - lng1);
+
+        double sindLat = Math.sin(dLat / 2);
+        double sindLng = Math.sin(dLng / 2);
+
+        double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
+                * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        double dist = earthRadius * c;
+
+        return dist; // output distance, in MILES
     }
 }
