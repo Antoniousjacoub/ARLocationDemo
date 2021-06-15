@@ -1,11 +1,17 @@
 package ng.dat.ar.helper;
 
+import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.text.DecimalFormat;
+
+import ng.dat.ar.R;
 
 /**
  * Created by ntdat on 1/13/17.
@@ -101,5 +107,23 @@ public class LocationHelper {
         double dist = earthRadius * c;
 
         return dist; // output distance, in MILES
+    }
+
+    public static void openGoogleMaps(Context context, LatLng srcLatLong, LatLng destLatLong) {
+        Intent intent;
+        try {
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme("http")
+                    .authority("maps.google.com")
+                    .appendPath("maps")
+                    .appendQueryParameter("saddr", srcLatLong.latitude + "," + srcLatLong.longitude)
+                    .appendQueryParameter("daddr", destLatLong.latitude + "," + destLatLong.longitude);
+
+            intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse(builder.build().toString()));
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, "Something went wrong! ", Toast.LENGTH_SHORT).show();
+        }
     }
 }

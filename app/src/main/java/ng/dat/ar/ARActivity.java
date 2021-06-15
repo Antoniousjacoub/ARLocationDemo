@@ -2,6 +2,7 @@ package ng.dat.ar;
 
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Sensor;
@@ -11,12 +12,15 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.opengl.Matrix;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +46,7 @@ import static android.view.Surface.ROTATION_180;
 import static android.view.Surface.ROTATION_270;
 import static ng.dat.ar.helper.Constants.DESTINATION_LAT;
 import static ng.dat.ar.helper.Constants.DESTINATION_LOG;
+import static ng.dat.ar.helper.LocationHelper.openGoogleMaps;
 
 public class ARActivity extends AppCompatActivity implements SensorEventListener, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private GoogleApiClient mGoogleApiClient;
@@ -55,6 +60,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     private ARCamera arCamera;
     private TextView tvCurrentLocation;
     private TextView tvBearing;
+    private Button btnGoogleMaps;
     private Step steps[];
     private SensorManager sensorManager;
     private boolean isDestinationPopupShowed = false;
@@ -82,6 +88,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
         surfaceView = findViewById(R.id.surface_view);
         tvCurrentLocation = findViewById(R.id.tv_current_location);
         tvBearing = findViewById(R.id.tv_bearing);
+        btnGoogleMaps = findViewById(R.id.btnGoogleMaps);
         arOverlayView = new AROverlayView(this);
         onSetGoogleApiClient();
     }
@@ -303,7 +310,22 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
                     location.getLatitude(), location.getLongitude(), location.getAltitude()));
             setDistance();
             checkTheSameLocation();
+            setListenerOnGoogleMapButton();
         }
+    }
+
+    private void setListenerOnGoogleMapButton() {
+        btnGoogleMaps.setVisibility(View.VISIBLE);
+        btnGoogleMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (location == null) return;
+                LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                LatLng destLatLng = new LatLng(DESTINATION_LAT, DESTINATION_LOG);
+                openGoogleMaps(ARActivity.this, currentLatLng, destLatLng);
+            }
+        });
+
     }
 
     @Override
@@ -347,6 +369,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
 
     private void setDistance() {
         if (location == null) return;
+        tvDistance.setVisibility(View.VISIBLE);
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
         LatLng destLatLng = new LatLng(DESTINATION_LAT, DESTINATION_LOG);
         tvDistance.setText(LocationHelper.calculationByDistance(currentLatLng, destLatLng));
