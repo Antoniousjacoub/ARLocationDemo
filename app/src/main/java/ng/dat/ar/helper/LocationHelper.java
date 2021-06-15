@@ -55,7 +55,7 @@ public class LocationHelper {
         return new float[] {east , north, up, 1};
     }
 
-    public static double calculationByDistance(LatLng StartP, LatLng EndP) {
+    public static String calculationByDistance(LatLng StartP, LatLng EndP) {
         int Radius = 6371;// radius of earth in Km
         double lat1 = StartP.latitude;
         double lat2 = EndP.latitude;
@@ -77,6 +77,6 @@ public class LocationHelper {
         Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
                 + " Meter   " + meterInDec);
 
-        return Radius * c;
+        return  String.format("Distance : %.2f KM", valueResult);
     }
 }

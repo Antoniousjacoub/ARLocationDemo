@@ -41,6 +41,9 @@ import static android.hardware.SensorManager.*;
 import static android.view.Surface.*;
 import static android.view.Surface.ROTATION_180;
 import static android.view.Surface.ROTATION_270;
+import static ng.dat.ar.helper.Utility.IBM_LAT;
+import static ng.dat.ar.helper.Utility.IBM_LOG;
+import static ng.dat.ar.helper.Utility.IBM_NAME;
 
 public class ARActivity extends AppCompatActivity implements SensorEventListener, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private GoogleApiClient mGoogleApiClient;
@@ -297,13 +300,13 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
             arOverlayView.updateCurrentLocation(location);
             tvCurrentLocation.setText(String.format("lat: %s \nlon: %s \naltitude: %s \n",
                     location.getLatitude(), location.getLongitude(), location.getAltitude()));
+            setDistance();
         }
     }
 
     @Override
     public void onLocationChanged(Location location) {
         updateLatestLocation();
-        setDistance();
     }
 
     @Override
@@ -339,10 +342,9 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
 
 
     private void setDistance() {
+        if (location == null) return;
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-        LatLng destLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-        tvDistance.setText("Distance ="+LocationHelper
-                .calculationByDistance(currentLatLng, destLatLng) + "");
+        LatLng destLatLng = new LatLng(IBM_LAT, IBM_LOG);
+        tvDistance.setText(LocationHelper.calculationByDistance(currentLatLng, destLatLng));
     }
 }
