@@ -12,6 +12,8 @@ import android.opengl.Matrix;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.IdRes;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,16 +34,18 @@ public class AROverlayView extends View {
     private float[] rotatedProjectionMatrix = new float[16];
     private Location currentLocation;
     private List<ARPoint> arPoints;
+    @IdRes
+    private int destinationIcon;
 
 
     public AROverlayView(Context context) {
         super(context);
 
         this.context = context;
-
+        setDestinationIcon(R.drawable.ic_logo);
         //Demo points
         arPoints = new ArrayList<ARPoint>() {{
-            Log.i("TAG", "instance initializer:"+"start");
+            Log.i("TAG", "instance initializer:" + "start");
             add(new ARPoint(DESTINATION_NAME, DESTINATION_LAT, DESTINATION_LOG, 0));
         }};
 
@@ -87,11 +91,15 @@ public class AROverlayView extends View {
                 float x = (0.5f + cameraCoordinateVector[0] / cameraCoordinateVector[3]) * canvas.getWidth();
                 float y = (0.5f - cameraCoordinateVector[1] / cameraCoordinateVector[3]) * canvas.getHeight();
 
-                Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_logo);
+                Bitmap b = BitmapFactory.decodeResource(getResources(), destinationIcon);
                 canvas.drawBitmap(Bitmap.createScaledBitmap(b, 300, 300, false), x - (30 * arPoints.get(i).getName().length() / 2), y - 80, paint);
                 canvas.drawCircle(x, y, radius, paint);
                 canvas.drawText(arPoints.get(i).getName(), x - (30 * arPoints.get(i).getName().length() / 2), y - 100, paint);
             }
         }
+    }
+
+    public void setDestinationIcon(int iconResID) {
+        destinationIcon = iconResID;
     }
 }

@@ -330,8 +330,8 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
 
     @Override
     public void onLocationChanged(Location location) {
-       // Toast.makeText(this,location.getLatitude()+","+location.getLongitude(),Toast.LENGTH_LONG).show();
-        this.location=location;
+        // Toast.makeText(this,location.getLatitude()+","+location.getLongitude(),Toast.LENGTH_LONG).show();
+        this.location = location;
         updateLatestLocation();
     }
 
@@ -380,12 +380,19 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
         LatLng destLatLng = new LatLng(DESTINATION_LAT, DESTINATION_LOG);
-        if (LocationHelper.distanceDiff(currentLatLng,destLatLng) < 10 && !isDestinationPopupShowed) {
+        if (LocationHelper.distanceDiff(currentLatLng, destLatLng) < 15 && !isDestinationPopupShowed) {
             Toast.makeText(this, getString(R.string.destinationReached)
                     , Toast.LENGTH_LONG).show();
             isDestinationPopupShowed = true;
+
+            onChangeDestinationIcon();
         }
 
 
+    }
+
+    private void onChangeDestinationIcon() {
+        arOverlayView.setDestinationIcon(R.drawable.ic_opened_gift);
+        arOverlayView.invalidate();
     }
 }
