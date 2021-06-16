@@ -38,4 +38,9 @@ dependencies {
     implementation ('android.arch.persistence.room:runtime:1.0.0-alpha1') {
         exclude group: "android.arch.core"
     }
+
+    //Lottie
+    def lottieVersion = "3.6.1"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
 }
