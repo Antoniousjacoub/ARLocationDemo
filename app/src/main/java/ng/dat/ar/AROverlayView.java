@@ -93,8 +93,9 @@ public class AROverlayView extends View {
 
                 Bitmap b = BitmapFactory.decodeResource(getResources(), destinationIcon);
                 canvas.drawBitmap(Bitmap.createScaledBitmap(b, 300, 300, false), x - (30 * arPoints.get(i).getName().length() / 2), y - 80, paint);
-                canvas.drawCircle(x, y, radius, paint);
+//                canvas.drawCircle(x, y, radius, paint);
                 canvas.drawText(arPoints.get(i).getName(), x - (30 * arPoints.get(i).getName().length() / 2), y - 100, paint);
+                canvas.drawColor(Color.TRANSPARENT);
             }
         }
     }

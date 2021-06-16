@@ -305,7 +305,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     }
 
     private void updateLatestLocation() {
-        if (arOverlayView != null && location != null) {
+        if (arOverlayView != null && location != null&&!isDestinationPopupShowed) {
             arOverlayView.updateCurrentLocation(location);
             tvCurrentLocation.setText(String.format("lat: %s \nlon: %s \naltitude: %s \n",
                     location.getLatitude(), location.getLongitude(), location.getAltitude()));
@@ -381,8 +381,8 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
         LatLng destLatLng = new LatLng(DESTINATION_LAT, DESTINATION_LOG);
-        if (LocationHelper.distanceDiff(currentLatLng,destLatLng) < 10 && !isDestinationPopupShowed) {
-            Utilities.showDialog(ARActivity.this,getString(R.string.destinationReached),null,"Done",0,null);
+        if (LocationHelper.distanceDiff(currentLatLng, destLatLng) < 10 && !isDestinationPopupShowed) {
+            Utilities.showDialog(ARActivity.this, getString(R.string.destinationReached), null, "Done", 0, null);
             isDestinationPopupShowed = true;
 
             onChangeDestinationIcon();
@@ -392,7 +392,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     }
 
     private void onChangeDestinationIcon() {
+        tvDistance.setVisibility(View.GONE);
         arOverlayView.setDestinationIcon(R.drawable.ic_opened_gift);
-        arOverlayView.invalidate();
     }
 }
