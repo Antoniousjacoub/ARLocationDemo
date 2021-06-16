@@ -26,6 +26,7 @@ public class Utilities {
                                   int icon,
                                   View.OnClickListener listener) {
 
+        if (activity == null || activity.isFinishing()) return;
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.message_dialog, null);
