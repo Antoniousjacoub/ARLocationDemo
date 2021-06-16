@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AR Location-based</string>
+    <string name="app_name">AR Demo</string>
     <string name="directions_base_url">https://maps.googleapis.com/</string>
     <string name="destinationReached">Destination reached!</string>
 </resources>
