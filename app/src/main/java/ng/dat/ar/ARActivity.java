@@ -38,6 +38,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 
 import ng.dat.ar.helper.LocationHelper;
+import ng.dat.ar.helper.Utilities;
 import ng.dat.ar.model.Step;
 
 import static android.hardware.SensorManager.*;
@@ -381,8 +382,7 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
         LatLng destLatLng = new LatLng(DESTINATION_LAT, DESTINATION_LOG);
         if (LocationHelper.distanceDiff(currentLatLng,destLatLng) < 10 && !isDestinationPopupShowed) {
-            Toast.makeText(this, getString(R.string.destinationReached)
-                    , Toast.LENGTH_LONG).show();
+            Utilities.showDialog(ARActivity.this,getString(R.string.destinationReached),null,"Done",0,null);
             isDestinationPopupShowed = true;
         }
 
