@@ -42,7 +42,7 @@ public class AROverlayView extends View {
         super(context);
 
         this.context = context;
-        setDestinationIcon(R.drawable.ic_logo);
+        setDestinationIcon(R.drawable.ic_foot_steps);
         //Demo points
         arPoints = new ArrayList<ARPoint>() {{
             Log.i("TAG", "instance initializer:" + "start");
