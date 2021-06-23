@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-feature android:name="android.hardware.camera"/>
-
+    <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_logo"
@@ -19,16 +19,16 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.google.ar.core" android:value="required" />
 
-        <activity android:name=".NavActivity">
+        <activity android:name=".ARActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ARActivity"
-            />
+
     </application>
 
 </manifest>
