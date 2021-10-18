@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ar-location-based-android.iml" filepath="$PROJECT_DIR$/.idea/modules/ar-location-based-android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ar-location-based-android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ar-location-based-android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ARLocationDemo.iml" filepath="$PROJECT_DIR$/.idea/modules/ARLocationDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ARLocationDemo.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ARLocationDemo.app.iml" />
     </modules>
   </component>
 </project>

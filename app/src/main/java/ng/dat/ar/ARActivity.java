@@ -49,7 +49,8 @@ import static ng.dat.ar.helper.Constants.DESTINATION_LAT;
 import static ng.dat.ar.helper.Constants.DESTINATION_LOG;
 import static ng.dat.ar.helper.LocationHelper.openGoogleMaps;
 
-public class ARActivity extends AppCompatActivity implements SensorEventListener, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class ARActivity extends AppCompatActivity
+        implements SensorEventListener, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private GoogleApiClient mGoogleApiClient;
 
     final static String TAG = "ARActivity";
@@ -68,8 +69,8 @@ public class ARActivity extends AppCompatActivity implements SensorEventListener
     private final static int REQUEST_CAMERA_PERMISSIONS_CODE = 11;
     public static final int REQUEST_LOCATION_PERMISSIONS_CODE = 0;
 
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0; // 10 meters
-    private static final long MIN_TIME_BW_UPDATES = 0;//1000 * 60 * 1; // 1 minute
+    public static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0; // 10 meters
+    public static final long MIN_TIME_BW_UPDATES = 0;//1000 * 60 * 1; // 1 minute
 
     private LocationManager locationManager;
     public Location location;

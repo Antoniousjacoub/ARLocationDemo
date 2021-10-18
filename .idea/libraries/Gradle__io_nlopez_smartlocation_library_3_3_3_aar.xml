@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: io.nlopez.smartlocation:library:3.3.3@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e193cb53ff597ff78d8a6f0a9d4da7b/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e193cb53ff597ff78d8a6f0a9d4da7b/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e193cb53ff597ff78d8a6f0a9d4da7b/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a9f3aed24cffd41e947aff0b96583be4/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a9f3aed24cffd41e947aff0b96583be4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a9f3aed24cffd41e947aff0b96583be4/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
